@@ -37,7 +37,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
-    bcrypt (3.1.7)
+    bcrypt (3.1.11)
+    bcrypt (3.1.11-x86-mingw32)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
@@ -80,6 +81,8 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     nokogiri (1.6.7.2-x86-mingw32)
       mini_portile2 (~> 2.0.0.rc2)
+    pg (0.17.1)
+    pg (0.17.1-x86-mingw32)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -102,6 +105,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (4.2.6)
       actionpack (= 4.2.6)
       activesupport (= 4.2.6)
@@ -152,13 +160,15 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bcrypt (= 3.1.7)
+  bcrypt (= 3.1.11)
   bootstrap-sass (= 3.2.0.0)
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  pg (= 0.17.1)
   rails (= 4.2.6)
+  rails_12factor (= 0.0.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
