@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #prevent non logged users to edit users info
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update]
   #prevent logged users to edit other's info
   before_action :correct_user,   only: [:edit, :update]
   def show
@@ -33,6 +33,10 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def index
+    @users = User.paginate(page: params[:page])
   end
 
   private
