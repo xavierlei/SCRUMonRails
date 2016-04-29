@@ -22,7 +22,7 @@ User.create!(name:  "Example User",
 end
 
 users = User.order(:created_at).take(6)
-50.times do
+0.times do
   description = Faker::Lorem.sentence(5)
   sample_name = "this is a fake project"
   users.each { |user| user.projects.create!(name: sample_name, description: description) }
