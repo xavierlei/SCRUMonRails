@@ -224,6 +224,14 @@ $gray-medium-light: #eaeaea;
       padding: 5px 0;
     }
   }
+  .edit_link{
+    display: block;
+    margin-left: 20px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
   .timestamp {
     color: $gray-light;
     display: block;

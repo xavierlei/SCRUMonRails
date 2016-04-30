@@ -1,10 +1,15 @@
 class ProjectsController < ApplicationController
-  before_action :logged_in_user, only: [:create]
-  before_action :correct_user,   only: [:create]
+  before_action :logged_in_user, only: [:create,:edit,:update]
+  before_action :correct_user,   only: [:create,:edit,:update]
 
   def new
     @user = User.find(params[:user_id])
     @project = Project.new
+  end
+
+  def edit
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
   end
 
   def create
@@ -16,6 +21,18 @@ class ProjectsController < ApplicationController
     else
       flash.now[:danger] = 'Project creation failed'
       render 'new'
+    end
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
+    if @project.update_attributes(project_params)
+      flash[:success] = "Project successfuly updated"
+      redirect_to @user
+    else
+      flash[:danger] = "Project update failed"
+      render 'edit'
     end
   end
 

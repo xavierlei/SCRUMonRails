@@ -4,4 +4,9 @@
   <span class="user">Product Owner: <%= link_to project.user.name, project.user%></span>
   <span class="description"><%=project.description%></span>
   <span class="timestamp">Created at <%=project.created_at%></span>
+  <span class = "edit_link">
+    <%if @user == current_user%>
+      <ol><%= link_to "edit Project", edit_user_project_path(@user.id,project.id) %></ol>
+    <%end%>
+  </span>
 </li>
