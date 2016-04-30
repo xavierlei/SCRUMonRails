@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
     @project = @user.projects.find(params[:id])
   end
 
+  def show
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
+  end
+
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.new(project_params)

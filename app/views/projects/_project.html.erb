@@ -1,6 +1,6 @@
 <li id ="project-<%= project.id%>" >
 <%= link_to gravatar_for(project.user, size: 50), project.user %>
-  <span class="name">Project name: <%=project.name%></span>
+  <span class="name">Project name: <%=link_to project.name, user_project_path(@user.id,project.id)%></span>
   <span class="user">Product Owner: <%= link_to project.user.name, project.user%></span>
   <span class="description"><%=project.description%></span>
   <span class="timestamp">Created at <%=project.created_at%></span>
