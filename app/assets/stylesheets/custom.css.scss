@@ -116,6 +116,9 @@ aside {
   section.user_info {
     margin-top: 20px;
   }
+  section.project_info{
+    margin-top: 20px;
+  }
   section {
     padding: 10px 0;
     margin-top: 20px;
@@ -129,6 +132,13 @@ aside {
       line-height: 1;
     }
     h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+    h2 {
       font-size: 1.4em;
       text-align: left;
       letter-spacing: -1px;
@@ -241,6 +251,35 @@ $gray-medium-light: #eaeaea;
     float: left;
     margin-right: 10px;
     margin-top: 5px;
+  }
+}
+.requirements {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .description {
+    display: block;
+    margin-left: 60px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .edit_link{
+    display: block;
+    margin-left: 20px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
   }
 }
 

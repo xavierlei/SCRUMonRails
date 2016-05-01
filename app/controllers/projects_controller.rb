@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:id])
+    @requirements = @project.requirements.paginate(page: params[:page])
   end
 
   def create
