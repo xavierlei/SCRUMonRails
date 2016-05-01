@@ -1,4 +1,6 @@
 class RequirementsController < ApplicationController
+  before_action :logged_in_user, only: [:create,:edit,:update,:destroy]
+  before_action :correct_user,   only: [:create,:edit,:update,:destroy]
   def new
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -52,5 +54,20 @@ class RequirementsController < ApplicationController
     def requirement_params
       params.require(:requirement).permit(:description)
     end
+    #####This code is (almost) the same that in UsersController.
+    #####move this code to ApplicationController
+       def logged_in_user
+         unless logged_in?
+           store_location
+           flash[:danger] = "Please log in."
+           redirect_to login_url
+         end
+       end
+
+       # Confirms the correct user.
+       def correct_user
+         @user = User.find(params[:user_id])
+         redirect_to(root_url) unless current_user?(@user)
+       end
 
 end
