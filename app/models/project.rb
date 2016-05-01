@@ -4,5 +4,5 @@ class Project < ActiveRecord::Base
   default_scope -> {order(created_at: :desc)}
   validates :user_id, presence: true
   validates :name, presence: true
-  validates :description, presence: true, length: {maximum: 140}
+  validates :description, presence: true, length: {maximum: 2048}
 end
