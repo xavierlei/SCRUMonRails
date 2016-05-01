@@ -1,0 +1,10 @@
+<li id ="requirement-<%= requirement.id%>" >
+
+  <span class="description"><%=requirement.description%></h3></span>
+  <%if @user == current_user%>
+    <ol><%= link_to "edit", edit_user_project_requirement_path(@user.id,@project.id,requirement.id) %></ol>
+    <ol>
+      <%= link_to 'Destroy', [@user,@project, requirement], :confirm => 'Are you sure?', :method => :delete %>
+    </ol>
+  <%end%>
+</li>

@@ -18,8 +18,11 @@ Rails.application.routes.draw do
    delete 'logout'  => 'sessions#destroy'
 
    resources :users do
-     resources :projects
+     resources :projects do
+       resources :requirements
+     end
    end
+
 
 
   # Example of regular route:
