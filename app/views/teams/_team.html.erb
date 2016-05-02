@@ -1,3 +1,6 @@
 <li id ="team-<%= team.id%>" >
   <span class="name"><h1><%=team.name%><h1></span>
+  <span class="edit_link">
+    <%= link_to "edit", edit_user_project_team_path(@user.id,@project.id,team.id) %>
+  </span>
 </li>

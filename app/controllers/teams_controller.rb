@@ -5,6 +5,24 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def edit
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @team = @project.teams.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @team = @project.teams.find(params[:id])
+    if @team.update_attributes(team_params)
+      flash[:success] = "team successfuly updated"
+      redirect_to user_project_path(@user.id,@project.id)
+    else
+      flash[:danger] = "team update failed"
+    end
+  end
+
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
