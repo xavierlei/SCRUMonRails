@@ -1,5 +1,5 @@
 <li id ="team-<%= team.id%>" >
-  <span class="name"><h1><%=team.name%><h1></span>
+  <span class="name"><h1><%=link_to team.name, user_project_team_path(@user.id,@project.id,team.id)%><h1></span>
   <% if @user == current_user %>
     <span class="edit_link">
       <%= link_to "edit", edit_user_project_team_path(@user.id,@project.id,team.id) %>

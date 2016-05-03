@@ -13,6 +13,12 @@ class TeamsController < ApplicationController
     @team = @project.teams.find(params[:id])
   end
 
+  def show
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @team = @project.teams.find(params[:id])
+  end
+
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
