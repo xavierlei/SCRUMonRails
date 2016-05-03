@@ -1,0 +1,13 @@
+<% provide(:title, 'update team') %>
+<h1>update team</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for([@user, @project, @team]) do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.submit "update team", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

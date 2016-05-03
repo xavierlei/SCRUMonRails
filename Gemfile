@@ -2,8 +2,18 @@ source 'https://rubygems.org'
 
 # my gems
 gem 'bootstrap-sass', '3.2.0.0'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+#this is to populate the database with fake users
+gem 'faker', '1.4.2'
+
+#for paginate the index page
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
+gem 'bcrypt', '3.1.11', :require => 'bcrypt'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -45,3 +55,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+
+#group :production do
+#  gem 'pg',             '0.17.1'
+#  gem 'rails_12factor', '0.0.2'
+#  gem 'puma',           '3.1.0'
+#end

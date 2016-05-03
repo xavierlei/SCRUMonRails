@@ -1,0 +1,40 @@
+<% provide(:title, @project.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="project_info">
+      <h1>
+        <%=@project.name%>
+      </h1>
+      <h2><%= @project.description %></h2>
+    </section>
+    <section class="project_info">
+      <h3>TEAMS</h3>
+      <% if @user == current_user %>
+        <ol><%=link_to "add team", new_user_project_team_path(@project.user_id,@project.id) %></ol>
+      <% end %>
+      <% if @project.teams.any? %>
+        <ol>
+          <%=render @teams%>
+        </ol>
+        <% else %>
+          <h1>there are currently no team added</h1>
+      <% end %>
+    </section>
+  </aside>
+
+
+  <div class="col-md-8">
+    <% if @user == current_user %>
+      <h3><%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %></h3>
+    <% end %>
+    <% if @project.requirements.any? %>
+      <ol class="requirements">
+        <%=render @requirements%>
+      </ol>
+    <%end%>
+  </div>
+
+
+
+
+</div>
