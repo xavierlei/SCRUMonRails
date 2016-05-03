@@ -11,6 +11,18 @@ class TeamsController < ApplicationController
     @team = @project.teams.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @team = @project.teams.find(params[:id])
+    if @team.destroy
+      flash[:success] = "Team successfuly deleted"
+      redirect_to user_project_path(@user.id,@project.id)
+    else
+      flash[:danger] = "Team deletion failed."
+    end
+  end
+
   def update
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
