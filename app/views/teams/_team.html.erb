@@ -1,7 +1,9 @@
 <li id ="team-<%= team.id%>" >
   <span class="name"><h1><%=team.name%><h1></span>
-  <span class="edit_link">
-    <%= link_to "edit", edit_user_project_team_path(@user.id,@project.id,team.id) %>
-    <%= link_to 'delete', [@user,@project, team], method: :delete, data: {:confirm => 'Are you sure?'} %>
-  </span>
+  <% if @user == current_user %>
+    <span class="edit_link">
+      <%= link_to "edit", edit_user_project_team_path(@user.id,@project.id,team.id) %>
+      <%= link_to 'delete', [@user,@project, team], method: :delete, data: {:confirm => 'Are you sure?'} %>
+    </span>
+  <% end %>
 </li>
