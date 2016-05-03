@@ -20,6 +20,7 @@ Rails.application.routes.draw do
    resources :users do
      resources :projects do
        resources :requirements
+       resources :teams
      end
    end
 
