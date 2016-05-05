@@ -17,6 +17,7 @@ class TeamsController < ApplicationController
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:id])
+    @roles = @team.roles
   end
 
   def destroy

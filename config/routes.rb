@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'roles/new'
+
   get 'sessions/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -20,7 +22,9 @@ Rails.application.routes.draw do
    resources :users do
      resources :projects do
        resources :requirements
-       resources :teams
+       resources :teams do
+         resources :roles
+       end
      end
    end
 

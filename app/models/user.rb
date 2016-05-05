@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
+  has_many :roles, dependent: :destroy
+  has_many :teams, through: :roles
 
   attr_accessor :remember_token
 
