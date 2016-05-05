@@ -23,6 +23,7 @@ class RolesController < ApplicationController
         redirect_to user_project_team_path(@user.id,@project.id,@team.id)
       else
         flash[:danger] = "member adition failed"
+        redirect_to user_project_team_path(@user.id,@project.id,@team.id)
       end
     else
       flash[:danger] = "the user doesn't exist"
