@@ -8,11 +8,9 @@
       <% if @user == current_user %>
         <ol><%= link_to "add member", new_user_project_team_role_path(@user.id,@project.id,@team.id) %></ol>
       <% end %>
-
-      <%@team.roles.each do |role|%>
-        <ol><h2><%=link_to role.user.name, user_path(role.user.id)%></h2> <%=role.description%></ol>
+      <%if @team.roles.any?%>
+        <%=render @roles%>
       <%end%>
-
     </section>
   </aside>
   <h3>this page will later include the team backlog</h3>
