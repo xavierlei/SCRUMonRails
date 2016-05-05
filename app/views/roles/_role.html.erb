@@ -1,1 +1,5 @@
-<ol><h2><%=link_to role.user.name, user_path(role.user.id)%></h2> <%=role.description%></ol>
+<hr><ol><h2><%=link_to role.user.name, user_path(role.user.id)%></h2> <%=role.description%></ol>
+<% if @user == current_user %>
+  <ol><%= link_to 'remove', [@user,@project, @team,role], method: :delete, data: {:confirm => 'Are you sure?'} %></ol>
+
+<% end %>
