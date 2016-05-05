@@ -5,6 +5,12 @@
       <h3>
         <%= @team.name %> page
       </h3>
+      <% if @user == current_user %>
+        <ol><%= link_to "add member", new_user_project_team_role_path(@user.id,@project.id,@team.id) %></ol>
+      <% end %>
+      <%if @team.roles.any?%>
+        <%=render @roles%>
+      <%end%>
     </section>
   </aside>
   <h3>this page will later include the team backlog</h3>

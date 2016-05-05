@@ -40,3 +40,10 @@ projects = Project.all
   description = Faker::Lorem.sentence(5)
   projects.each{ |project| project.requirements.create!(description: description)}
 end
+
+projects2 = Project.all
+names = ["los bananas","los bandidos","los scrum maestros","los hombres barigudos ","los mariachis",
+          "los nachos", "los mustachios", "los hombres sin bigotes","los de la Uminho"]
+5.times do
+  projects2.each{ |project| project.teams.create!(name: names.sample)}
+end
