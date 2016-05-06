@@ -1,6 +1,29 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, only: [:create,:edit,:update,:destroy]
   before_action :correct_user,   only: [:create,:edit,:update,:destroy]
+
+# CRUMBS ----------------
+  before_filter :load_user, :load_team, :load_project, :only => "show"
+  add_crumb(:user_name, :load_user )
+  add_crumb(:project_name){[:user, :project]}
+  add_crumb(:team_name){[:user, :project, :team]}
+
+  def load_user
+    @user_name = User.find(params[:user_id]).name
+    @user = User.find(params[:user_id])
+  end
+  def load_project
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @project_name = @user.projects.find(params[:project_id]).name
+  end
+  def load_team
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @team = @project.teams.find(params[:id])
+    @team_name = @team.name
+  end
+# CRUMBS ----------------
   def new
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])

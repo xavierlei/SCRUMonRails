@@ -5,6 +5,16 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   #to prevent that only admins can delete users
   before_action :admin_user, only: :destroy
+
+ # CRUMBS ----------------
+ before_filter :load_user, :only => "show"
+ add_crumb(:user_name, :load_user )
+ def load_user
+   @user_name = User.find(params[:id]).name
+   @user = User.find(params[:id])
+ end
+# CRUMBS ----------------
+
   def show
     @user = User.find(params[:id])
     @projects = @user.projects.paginate(page: params[:page])
