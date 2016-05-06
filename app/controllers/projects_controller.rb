@@ -3,9 +3,9 @@ class ProjectsController < ApplicationController
   before_action :correct_user,   only: [:create,:edit,:update]
 
 # CRUMBS ----------------
-  before_filter :load_user, :load_project, :only => "show"
-  add_crumb(:user_name, :load_user )
-  add_crumb(:project_name){[:user, :project]}
+  before_filter :load_user, :load_project, :only=>'show'
+  add_crumb(:user_name, :load_user, :only=>'show')
+  add_crumb(:project_name, :only=>'show'){[:user, :project]}
 
   def load_user
     @user_name = User.find(params[:user_id]).name
