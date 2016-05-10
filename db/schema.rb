@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 20160510192749) do
   create_table "sprints", force: :cascade do |t|
     t.date     "begin"
     t.date     "end"
-    t.integer  "user_id"
+    t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "sprints", ["user_id"], name: "index_sprints_on_user_id"
+  add_index "sprints", ["project_id"], name: "index_sprints_on_project_id"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

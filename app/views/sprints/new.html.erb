@@ -1,2 +1,15 @@
-<h1>Sprints#new</h1>
-<p>Find me in app/views/sprints/new.html.erb</p>
+<% provide(:title, 'new sprint') %>
+<h1>Create a new sprint</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for([@user, @project, @sprint]) do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :begin %>
+      <%= select_date Date.today, prefix: :begin %>
+      <%= f.label :end %>
+      <%= select_date Date.today, prefix: :end %>
+      <%= f.submit "Create team", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
