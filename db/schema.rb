@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504194025) do
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+ActiveRecord::Schema.define(version: 20160510192749) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -52,6 +45,16 @@ ActiveRecord::Schema.define(version: 20160504194025) do
   add_index "roles", ["email"], name: "index_roles_on_email"
   add_index "roles", ["team_id"], name: "index_roles_on_team_id"
   add_index "roles", ["user_id"], name: "index_roles_on_user_id"
+
+  create_table "sprints", force: :cascade do |t|
+    t.date     "begin"
+    t.date     "end"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sprints", ["user_id"], name: "index_sprints_on_user_id"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

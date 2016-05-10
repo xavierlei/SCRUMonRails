@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  begin: 2016-05-10
+  end: 2016-05-10
+  user_id: 
+
+two:
+  begin: 2016-05-10
+  end: 2016-05-10
+  user_id: 
