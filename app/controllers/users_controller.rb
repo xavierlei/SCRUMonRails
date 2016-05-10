@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
  # CRUMBS ----------------
  before_filter :load_user, :only=>'show'
- add_crumb(:user_name, :load_user, :only=>'show')
+ add_crumb(:user_name, :only=>'show'){[:user]}
  def load_user
    @user_name = User.find(params[:id]).name
    @user = User.find(params[:id])
