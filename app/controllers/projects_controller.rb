@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
 # CRUMBS ----------------
   before_filter :load_user, :load_project, :only=>'show'
-  add_crumb(:user_name, :load_user, :only=>'show')
+  add_crumb(:user_name, :only=>'show'){[:user]}
   add_crumb(:project_name, :only=>'show'){[:user, :project]}
 
   def load_user
