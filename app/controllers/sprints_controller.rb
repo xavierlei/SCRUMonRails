@@ -4,6 +4,11 @@ class SprintsController < ApplicationController
     @project = @user.projects.find(params[:project_id])
     @sprint = Sprint.new
   end
+  def index
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:project_id])
+    @sprints = @project.sprints.all
+  end
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -15,7 +20,7 @@ class SprintsController < ApplicationController
     else
       flash[:danger] = @sprint.errors.full_messages.to_sentence
     end
-    redirect_to user_project_path(@user.id,@project.id)
+    redirect_to user_project_sprints_path(@user.id,@project.id)
   end
 
 end
