@@ -1,5 +1,7 @@
 <h1>Scrum Board</h1>
-<ol>
-  <%=link_to "add sprint", new_user_project_sprint_path(@project.user_id,@project.id)%>
-</ol>
+<% if @user == current_user %>
+  <ol>
+    <%=link_to "add sprint", new_user_project_sprint_path(@project.user_id,@project.id)%>
+  </ol>
+<% end %>
 <%= render @sprints%>

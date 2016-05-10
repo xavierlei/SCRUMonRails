@@ -2,8 +2,13 @@
 <tr>
   <td>
     <tr>
-      begin <%=sprint.begin%>
-      <br>end <%=sprint.end%>
+      begin <%=sprint.begin_date%>
+      <br>end <%=sprint.end_date%>
     </tr>
+    <% if @user == current_user %>
+      <ol>
+        <%= link_to 'delete', [@user,@project, sprint], method: :delete, data: {:confirm => 'Are you sure?'} %>
+      </ol>
+    <% end %>
   </td>
 </tr>

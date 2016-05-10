@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160510192749) do
   add_index "roles", ["user_id"], name: "index_roles_on_user_id"
 
   create_table "sprints", force: :cascade do |t|
-    t.date     "begin"
-    t.date     "end"
+    t.date     "begin_date"
+    t.date     "end_date"
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
