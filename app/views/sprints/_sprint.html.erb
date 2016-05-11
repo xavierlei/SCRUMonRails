@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    begin <%=sprint.begin_date%>
+    <br>end <%=sprint.end_date%>
+    <% if @user == current_user %>
+      <ol>
+        <%=link_to 'delegate task', new_user_project_sprint_task_path(@user,@project,sprint)%>
+      </ol>
+      <ol>
+        <%= link_to 'delete', [@user,@project, sprint], method: :delete, data: {:confirm => 'Are you sure?'} %>
+      </ol>
+    <% end %>
+  </td>
+  <%@project.teams.each do |team|%>
+    <td>
+      <%sprint.tasks.each do |t|%>
+        <% if team.id == t.team_id && sprint.id == t.sprint_id %>
+          <ol><%=t.requirement.description%></ol>
+          <ol>
+            <%= link_to 'undelegate', [@user,@project, sprint,t], method: :delete, data: {:confirm => 'Are you sure?'} %>
+          </ol>
+        <% end %>
+      <% end %>
+    </td>
+  <%end%>
+</tr>

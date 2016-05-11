@@ -1,0 +1,15 @@
+<% provide(:title, 'new sprint') %>
+<h1>Create a new sprint</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for([@user, @project, @sprint]) do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :begin %>
+      <%= select_date Date.today, prefix: :begin_date %>
+      <%= f.label :end %>
+      <%= select_date Date.today, prefix: :end_date %>
+      <%= f.submit "Create Sprint", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

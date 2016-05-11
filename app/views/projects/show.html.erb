@@ -6,6 +6,9 @@
         <%=@project.name%>
       </h1>
       <h2><%= @project.description %></h2>
+      <ol>
+        <%=link_to "SCRUM BOARD", user_project_sprints_path(@project.user_id,@project.id)%>
+      </ol>
     </section>
     <section class="project_info">
       <h3>TEAMS</h3>
