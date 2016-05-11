@@ -1,0 +1,15 @@
+<% provide(:title, 'add task') %>
+<h1>delegate a task to a team</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for([@user, @project, @sprint,@task]) do |f| %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :Team %>
+      <%= f.collection_select(:team_id, @teams, :id, :name) %>
+      <%=f.label :Requirement%>
+      <%=f.collection_select(:requirement_id, @requirements,:id,:description)%>
+      <%= f.submit "Create team", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

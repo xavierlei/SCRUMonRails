@@ -8,6 +8,7 @@
     <% if @user == current_user %>
       <ol>
         <%= link_to 'delete', [@user,@project, sprint], method: :delete, data: {:confirm => 'Are you sure?'} %>
+        <%=link_to 'add task', new_user_project_sprint_task_path(@user,@project,sprint)%>
       </ol>
     <% end %>
   </td>
