@@ -2,6 +2,7 @@ class Sprint < ActiveRecord::Base
   belongs_to :project
   validates :begin_date, presence: true
   validates :end_date, presence: true
+  has_many :tasks, dependent: :destroy
   has_many :teams, through: :tasks
   has_many :requirements, through: :tasks
   default_scope ->{order(begin_date: :asc)}
