@@ -9,7 +9,7 @@
       <%= f.collection_select(:team_id, @teams, :id, :name) %>
       <%=f.label :Requirement%>
       <%=f.collection_select(:requirement_id, @requirements,:id,:description)%>
-      <%= f.submit "Create team", class: "btn btn-primary" %>
+      <%= f.submit "delegate task", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

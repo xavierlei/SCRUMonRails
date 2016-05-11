@@ -4,7 +4,7 @@
     <br>end <%=sprint.end_date%>
     <% if @user == current_user %>
       <ol>
-        <%=link_to 'add task', new_user_project_sprint_task_path(@user,@project,sprint)%>
+        <%=link_to 'delegate task', new_user_project_sprint_task_path(@user,@project,sprint)%>
       </ol>
       <ol>
         <%= link_to 'delete', [@user,@project, sprint], method: :delete, data: {:confirm => 'Are you sure?'} %>
