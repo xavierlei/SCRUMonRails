@@ -6,7 +6,10 @@
   <span class="timestamp">Created at <%=project.created_at%></span>
   <span class = "edit_link">
     <%if @user == current_user%>
-      <ol><%= link_to "edit Project", edit_user_project_path(@user.id,project.id) %></ol>
+      <ol>
+        <%= link_to "edit", edit_user_project_path(@user.id,project.id) %>
+        <%= link_to 'delete', [@user,project], method: :delete, data: {:confirm => 'Are you sure?'} %>
+      </ol>
     <%end%>
   </span>
 </li>

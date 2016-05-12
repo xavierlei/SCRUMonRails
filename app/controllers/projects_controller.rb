@@ -33,6 +33,16 @@ class ProjectsController < ApplicationController
     @requirements = @project.requirements.paginate(page: params[:page])
     @teams = @project.teams
   end
+  def destroy
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
+    if @project.destroy
+      flash[:success] = "project successfuly deleted"
+    else
+      flash[:danger] = "error while deleting project"
+    end
+    redirect_to @user
+  end
 
   def create
     @user = User.find(params[:user_id])
