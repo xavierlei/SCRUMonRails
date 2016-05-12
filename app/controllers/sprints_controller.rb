@@ -1,6 +1,21 @@
 class SprintsController < ApplicationController
   before_action :logged_in_user, only: [:create,:destroy]
   before_action :correct_user, only: [:create,:destroy]
+
+  # CRUMBS ----------------
+    before_filter :load_cenas, :only=>'index'
+    add_crumb(:user_name, :only=>'index'){[:user]}
+    add_crumb(:project_name, :only=>'index'){[:user, :project]}
+    add_crumb("Scrum Board", :only=>"index"){|instance| instance.send :user_project_sprints_path}
+
+    def load_cenas
+      @user_name = User.find(params[:user_id]).name
+      @user = User.find(params[:user_id])
+      @project = @user.projects.find(params[:project_id])
+      @project_name = @user.projects.find(params[:project_id]).name
+
+    end
+
   def new
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
