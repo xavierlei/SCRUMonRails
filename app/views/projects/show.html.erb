@@ -29,6 +29,8 @@
   <div class="col-md-8">
     <% if @user == current_user %>
       <h3><%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %></h3>
+      <%else%>
+      <h3>requirements</h3>
     <% end %>
     <% if @project.requirements.any? %>
       <ol class="requirements">

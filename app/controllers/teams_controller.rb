@@ -49,10 +49,10 @@ class TeamsController < ApplicationController
     @team = @project.teams.find(params[:id])
     if @team.destroy
       flash[:success] = "Team successfuly deleted"
-      redirect_to user_project_path(@user.id,@project.id)
     else
       flash[:danger] = "Team deletion failed."
     end
+    redirect_to user_project_path(@user.id,@project.id)
   end
 
   def update
@@ -61,10 +61,10 @@ class TeamsController < ApplicationController
     @team = @project.teams.find(params[:id])
     if @team.update_attributes(team_params)
       flash[:success] = "team successfuly updated"
-      redirect_to user_project_path(@user.id,@project.id)
     else
-      flash[:danger] = "team update failed"
+      flash[:danger] = @team.errors.full_messages.to_sentence
     end
+    redirect_to user_project_path(@user.id,@project.id)
   end
 
   def create
@@ -73,10 +73,10 @@ class TeamsController < ApplicationController
     @team = @project.teams.new(team_params)
     if @team.save
       flash[:success] = "new team added to project"
-      redirect_to user_project_path(@user.id,@project.id)
     else
-      flash[:danger] = "team creation failed"
+      flash[:danger] = @team.errors.full_messages.to_sentence
     end
+    redirect_to user_project_path(@user.id,@project.id)
   end
   private
     def team_params
