@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     #@teams = @user.teams
     project_ids = @user.teams.map(&:project_id)
     project_ids += @user.projects.map(&:id)
-    @projects = Project.find(project_ids)
+    @projects = Project.where(id: project_ids).paginate(page: params[:page],  :per_page => 5)
   end
   def new
     @user = User.new
