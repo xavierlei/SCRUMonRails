@@ -17,7 +17,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @projects = @user.projects.paginate(page: params[:page])
+    #@projects = @user.projects.paginate(page: params[:page])
+    #@teams = @user.teams
+    project_ids = @user.teams.map(&:project_id)
+    project_ids += @user.projects.map(&:id)
+    @projects = Project.find(project_ids)
   end
   def new
     @user = User.new

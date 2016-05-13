@@ -6,6 +6,7 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <%= @user.email %>
     </section>
   </aside>
 
@@ -18,7 +19,7 @@
       <ol class="projects">
         <%=render @projects%>
       </ol>
-      <%= will_paginate @projects%>
+
     <% end %>
   </div>
 
