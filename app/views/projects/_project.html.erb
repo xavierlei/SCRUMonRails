@@ -5,7 +5,7 @@
   <span class="description"><%=project.description%></span>
   <span class="timestamp">Created at <%=project.created_at%></span>
   <span class = "edit_link">
-    <%if @user == current_user%>
+    <%if @user == current_user && project.user_id == @user.id%>
       <ol>
         <%= link_to "edit", edit_user_project_path(project.user_id,project.id) %>
         <%= link_to 'delete', [project.user,project], method: :delete, data: {:confirm => 'Are you sure?'} %>

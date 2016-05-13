@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :logged_in_user, only: [:create,:edit,:update]
-  before_action :correct_user,   only: [:create,:edit,:update]
+  before_action :logged_in_user, only: [:create,:edit,:update,:destroy]
+  before_action :correct_user,   only: [:create,:edit,:update,:destroy]
 
 # CRUMBS ----------------
   before_filter :load_user, :load_project, :only=>'show'
