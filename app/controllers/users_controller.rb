@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #prevent non logged users to edit users info
-  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :show]
   #prevent logged users to edit other's info
   before_action :correct_user,   only: [:edit, :update]
   #to prevent that only admins can delete users
@@ -17,11 +17,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #@projects = @user.projects.paginate(page: params[:page])
-    #@teams = @user.teams
+    @projects = @user.projects.paginate(page: params[:page], :per_page => 5)
     project_ids = @user.teams.map(&:project_id)
-    project_ids += @user.projects.map(&:id)
-    @projects = Project.where(id: project_ids).paginate(page: params[:page],  :per_page => 5)
+    project_ids -= @user.projects.map(&:id)
+    @projects_contributed = Project.where(id: project_ids).paginate(page: params[:page], :per_page => 3)
   end
   def new
     @user = User.new
