@@ -12,6 +12,15 @@ gem 'faker', '1.4.2'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
+#for diagrams generation
+group :development, :test do
+    gem 'railroady'
+end
+#or
+group :development do
+  gem 'rails-erd'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 gem 'bcrypt', '3.1.11', :require => 'bcrypt'
