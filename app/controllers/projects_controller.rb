@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :logged_in_user, only: [:create,:edit,:update,:destroy,:show]
   before_action :correct_user,   only: [:create,:edit,:update,:destroy]
-  before_action :permission, only: :show
+  before_action :check_user_permission, only: :show
 
 # CRUMBS ----------------
   before_filter :load_user, :load_project, :only=>'show'
@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    def permission
+    def check_user_permission
       contribution_project_ids = current_user.teams.map(&:project_id)
       own_projects_ids = current_user.projects.map(&:id)
       redirect_to(root_url) unless contribution_project_ids.include?(params[:id].to_i) || own_projects_ids.include?(params[:id].to_i)

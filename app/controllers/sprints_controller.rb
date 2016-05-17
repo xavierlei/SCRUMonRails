@@ -1,6 +1,7 @@
 class SprintsController < ApplicationController
   before_action :logged_in_user, only: [:create,:destroy]
   before_action :correct_user, only: [:create,:destroy]
+  before_action :check_user_permission, only: :index
 
   # CRUMBS ----------------
     before_filter :load_cenas, :only=>'index'
@@ -66,6 +67,12 @@ class SprintsController < ApplicationController
   def correct_user
     @user = User.find(params[:user_id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def check_user_permission
+    contribution_project_ids = current_user.teams.map(&:project_id)
+    own_projects_ids = current_user.projects.map(&:id)
+    redirect_to(root_url) unless contribution_project_ids.include?(params[:project_id].to_i) || own_projects_ids.include?(params[:project_id].to_i)
   end
 
 end
