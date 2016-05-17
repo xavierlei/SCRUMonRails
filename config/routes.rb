@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  get 'tasks/new'
+
+  get 'sprints/new'
+
   get 'roles/new'
 
   get 'sessions/new'
@@ -24,6 +28,9 @@ Rails.application.routes.draw do
        resources :requirements
        resources :teams do
          resources :roles
+       end
+       resources :sprints do
+         resources :tasks
        end
      end
    end

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504194025) do
+ActiveRecord::Schema.define(version: 20160511091405) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -45,6 +52,28 @@ ActiveRecord::Schema.define(version: 20160504194025) do
   add_index "roles", ["email"], name: "index_roles_on_email"
   add_index "roles", ["team_id"], name: "index_roles_on_team_id"
   add_index "roles", ["user_id"], name: "index_roles_on_user_id"
+
+  create_table "sprints", force: :cascade do |t|
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sprints", ["project_id"], name: "index_sprints_on_project_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "sprint_id"
+    t.integer  "requirement_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "tasks", ["requirement_id"], name: "index_tasks_on_requirement_id"
+  add_index "tasks", ["sprint_id"], name: "index_tasks_on_sprint_id"
+  add_index "tasks", ["team_id"], name: "index_tasks_on_team_id"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

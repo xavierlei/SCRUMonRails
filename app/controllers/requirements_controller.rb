@@ -32,10 +32,10 @@ class RequirementsController < ApplicationController
     @requirement = @project.requirements.new(requirement_params)
     if @requirement.save
       flash[:success] = "requirement added to project"
-      redirect_to user_project_path(@user.id,@project.id)
     else
-      flash[:danger] = "requirement creation failed"
+      flash[:danger] = @requirement.errors.full_messages.to_sentence
     end
+    redirect_to user_project_path(@user.id,@project.id)
   end
 
   def update
@@ -44,10 +44,10 @@ class RequirementsController < ApplicationController
     @requirement = @project.requirements.find(params[:id])
     if @requirement.update_attributes(requirement_params)
       flash[:success] = "requirement successfuly updated"
-      redirect_to user_project_path(@user.id,@project.id)
     else
-      flash[:danger] = "requirement edition failed"
+      flash[:danger] = @requirement.errors.full_messages.to_sentence
     end
+    redirect_to user_project_path(@user.id,@project.id)
   end
 
   private

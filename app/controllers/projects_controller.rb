@@ -1,7 +1,23 @@
 class ProjectsController < ApplicationController
-  before_action :logged_in_user, only: [:create,:edit,:update]
-  before_action :correct_user,   only: [:create,:edit,:update]
+  before_action :logged_in_user, only: [:create,:edit,:update,:destroy,:show]
+  before_action :correct_user,   only: [:create,:edit,:update,:destroy]
+  before_action :check_user_permission, only: :show
 
+# CRUMBS ----------------
+  before_filter :load_user, :load_project, :only=>'show'
+  add_crumb(:user_name, :only=>'show'){[:user]}
+  add_crumb(:project_name, :only=>'show'){[:user, :project]}
+
+  def load_user
+    @user_name = User.find(params[:user_id]).name
+    @user = User.find(params[:user_id])
+  end
+  def load_project
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
+    @project_name = @user.projects.find(params[:id]).name
+  end
+# CRUMBS ----------------
   def new
     @user = User.find(params[:user_id])
     @project = Project.new
@@ -17,6 +33,16 @@ class ProjectsController < ApplicationController
     @project = @user.projects.find(params[:id])
     @requirements = @project.requirements.paginate(page: params[:page])
     @teams = @project.teams
+  end
+  def destroy
+    @user = User.find(params[:user_id])
+    @project = @user.projects.find(params[:id])
+    if @project.destroy
+      flash[:success] = "project successfuly deleted"
+    else
+      flash[:danger] = "error while deleting project"
+    end
+    redirect_to @user
   end
 
   def create
@@ -61,6 +87,12 @@ class ProjectsController < ApplicationController
     def correct_user
       @user = User.find(params[:user_id])
       redirect_to(root_url) unless current_user?(@user)
+    end
+
+    def check_user_permission
+      contribution_project_ids = current_user.teams.map(&:project_id)
+      own_projects_ids = current_user.projects.map(&:id)
+      redirect_to(root_url) unless contribution_project_ids.include?(params[:id].to_i) || own_projects_ids.include?(params[:id].to_i)
     end
 
 end

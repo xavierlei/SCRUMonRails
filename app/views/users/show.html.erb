@@ -6,20 +6,30 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <%= @user.email %>
     </section>
   </aside>
 
   <div class="col-md-8">
     <%if @user == current_user%>
       <ol class ="projects"><h3><%= link_to "New Project", new_user_project_path(@user.id) %></h3></ol>
-    <%end%>
-    <% if @user.projects.any? %>
+    <% if @projects.any? %>
       <h3>Projects (<%=@user.projects.count%>)</h3>
       <ol class="projects">
         <%=render @projects%>
       </ol>
-      <%= will_paginate @projects%>
     <% end %>
+    <%= will_paginate @projects%>
+
+    <% if @projects_contributed.any? %>
+      <h3>Contributing to Projects (<%=@projects_contributed.count%>)</h3>
+      <ol class="projects">
+        <%=render @projects_contributed%>
+      </ol>
+    <%end%>
+    <%= will_paginate @projects_contributed%>
+
+      <%end%>
   </div>
 
 </div>

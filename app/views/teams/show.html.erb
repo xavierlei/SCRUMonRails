@@ -13,5 +13,30 @@
       <%end%>
     </section>
   </aside>
-  <h3>this page will later include the team backlog</h3>
+  <table id="backlog">
+    <tr>
+      <td id ="sprint">
+        <h4>sprint</h4>
+      </td>
+      <td>
+        <h4>requirement</h4>
+      </td>
+    </tr>
+    <%@project.sprints.each do |s|%>
+      <tr>
+        <th>
+          begin <%= s.begin_date %>
+          <br>end <%= s.end_date %>
+        </th>
+        <td>
+          <%s.tasks.each do |t|%>
+            <% if t.team_id == @team.id %>
+              <%=t.requirement.description%>
+              <hr>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
