@@ -13,19 +13,15 @@
     <section class="project_info">
       <h3>TEAMS</h3>
       <% if @user == current_user %>
-        <ol><%=link_to "add team", new_user_project_team_path(@project.user_id,@project.id) %></ol>
+        <%=link_to "add team", new_user_project_team_path(@project.user_id,@project.id) %>
       <% end %>
       <% if @project.teams.any? %>
-        <ol>
           <%=render @teams%>
-        </ol>
         <% else %>
           <h1>there are currently no team added</h1>
       <% end %>
     </section>
   </aside>
-
-
   <div class="col-md-8">
     <% if @user == current_user %>
       <h3><%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %></h3>
@@ -38,8 +34,4 @@
       </ol>
     <%end%>
   </div>
-
-
-
-
 </div>

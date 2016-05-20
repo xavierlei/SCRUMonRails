@@ -18,7 +18,6 @@ class RolesController < ApplicationController
     end
     redirect_to user_project_team_path(@user.id,@project.id,@team.id)
   end
-
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -38,10 +37,7 @@ class RolesController < ApplicationController
     redirect_to user_project_team_path(@user.id,@project.id,@team.id)
   end
 
-
   private
-  #####This code is (almost) the same that in UsersController.
-  #####move this code to ApplicationController
   def logged_in_user
     unless logged_in?
       store_location
@@ -49,8 +45,6 @@ class RolesController < ApplicationController
       redirect_to login_url
     end
   end
-
-  # Confirms the correct user.
   def correct_user
     @user = User.find(params[:user_id])
     redirect_to(root_url) unless current_user?(@user)

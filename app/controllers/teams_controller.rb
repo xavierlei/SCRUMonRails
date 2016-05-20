@@ -8,7 +8,6 @@ class TeamsController < ApplicationController
   add_crumb(:user_name, :only=>'show'){[:user]}
   add_crumb(:project_name, :only=>'show'){[:user, :project]}
   add_crumb(:team_name, :only=>'show'){[:user, :project, :team]}
-
   def load_user
     @user_name = User.find(params[:user_id]).name
     @user = User.find(params[:user_id])
@@ -30,20 +29,17 @@ class TeamsController < ApplicationController
     @project = @user.projects.find(params[:project_id])
     @team = Team.new
   end
-
   def edit
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:id])
   end
-
   def show
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:id])
     @roles = @team.roles
   end
-
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -55,7 +51,6 @@ class TeamsController < ApplicationController
     end
     redirect_to user_project_path(@user.id,@project.id)
   end
-
   def update
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -67,7 +62,6 @@ class TeamsController < ApplicationController
     end
     redirect_to user_project_path(@user.id,@project.id)
   end
-
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -79,33 +73,27 @@ class TeamsController < ApplicationController
     end
     redirect_to user_project_path(@user.id,@project.id)
   end
+
   private
     def team_params
       params.require(:team).permit(:name)
     end
 
-    #####This code is (almost) the same that in UsersController.
-    #####move this code to ApplicationController
-       def logged_in_user
-         unless logged_in?
-           store_location
-           flash[:danger] = "Please log in."
-           redirect_to login_url
-         end
-       end
-
-       # Confirms the correct user.
-       def correct_user
-         @user = User.find(params[:user_id])
-         redirect_to(root_url) unless current_user?(@user)
-       end
-
-       def check_user_permission
-         contribution_project_ids = current_user.teams.map(&:project_id)
-         own_projects_ids = current_user.projects.map(&:id)
-         redirect_to(root_url) unless contribution_project_ids.include?(params[:project_id].to_i) || own_projects_ids.include?(params[:project_id].to_i)
-       end
-
-
+    def logged_in_user
+      unless logged_in?
+       store_location
+       flash[:danger] = "Please log in."
+       redirect_to login_url
+     end
+    end
+    def correct_user
+     @user = User.find(params[:user_id])
+     redirect_to(root_url) unless current_user?(@user)
+    end
+    def check_user_permission
+      contribution_project_ids = current_user.teams.map(&:project_id)
+      own_projects_ids = current_user.projects.map(&:id)
+      redirect_to(root_url) unless contribution_project_ids.include?(params[:project_id].to_i) || own_projects_ids.include?(params[:project_id].to_i)
+    end
 
 end
