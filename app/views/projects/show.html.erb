@@ -10,7 +10,6 @@
         <%=link_to "SCRUM BOARD", user_project_sprints_path(@project.user_id,@project.id)%>
       </ol>
     </section>
-
     <section class="project_info">
       <h3>TEAMS</h3>
       <% if @user == current_user %>
@@ -23,8 +22,6 @@
       <% end %>
     </section>
   </aside>
-
-
   <div class="col-md-8">
     <% if @user == current_user %>
       <h3><%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %></h3>
@@ -37,8 +34,4 @@
       </ol>
     <%end%>
   </div>
-
-
-
-
 </div>
