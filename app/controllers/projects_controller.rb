@@ -37,12 +37,12 @@ class ProjectsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:id])
-    if @project.destroy
-      flash[:success] = "project successfuly deleted"
-    else
-      flash[:danger] = "error while deleting project"
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.json { head :ok }
+      format.js
     end
-    redirect_to @user
   end
 
   def create

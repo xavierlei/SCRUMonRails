@@ -1,3 +1,4 @@
+<%=div_for requirement do%>
 <li id ="requirement-<%= requirement.id%>" >
   <span class="description"><%=requirement.description%></span>
   <span class="timestamp">Created at <%=requirement.created_at%></span>
@@ -5,8 +6,10 @@
     <span class = "edit_link">
       <ol>
         <%= link_to "edit", edit_user_project_requirement_path(@user.id,@project.id,requirement.id) %>
-        <%= link_to 'delete', [@user,@project, requirement], method: :delete, data: {:confirm => 'Are you sure?'} %>
+        <%= link_to 'delete', [@user,@project, requirement], method: :delete, data: {:confirm => 'Are you sure?'},
+            :remote => true%>
       </ol>
     </span>
   <%end%>
 </li>
+<% end %>
