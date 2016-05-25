@@ -52,9 +52,13 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_url
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :ok }
+      format.js
+    end
   end
   private
     def user_params

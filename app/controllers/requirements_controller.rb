@@ -15,12 +15,12 @@ class RequirementsController < ApplicationController
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @requirement = @project.requirements.find(params[:id])
-    if @requirement.destroy
-      flash[:success] = "requirement successfuly destroyed"
-    else
-      flash[:danger] = "requirement delete failed"
+    @requirement.destroy
+    respond_to do |format|
+      format.html { redirect_to user_project_path(@user.id,@project.id) }
+      format.json { head :ok }
+      format.js
     end
-    redirect_to user_project_path(@user.id,@project.id)
   end
   def create
     @user = User.find(params[:user_id])
