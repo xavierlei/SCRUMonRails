@@ -11,12 +11,13 @@ class RolesController < ApplicationController
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:team_id])
-    if Role.find(params[:id]).destroy
-      flash[:success] = "Team member successfuly removed"
-    else
-      flash[:danger] = @role.errors.full_messages.to_sentence
-    end
-    redirect_to user_project_team_path(@user.id,@project.id,@team.id)
+    @role = Role.find(params[:id])
+    @role.destroy
+      respond_to do |format|
+        format.html{redirect_to user_project_team_path(@user.id,@project.id,@team.id)}
+        format.json { head :ok }
+        format.js
+      end
   end
   def create
     @user = User.find(params[:user_id])
