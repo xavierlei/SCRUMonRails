@@ -15,9 +15,9 @@
     <td>
       <%sprint.tasks.each do |t|%>
         <% if team.id == t.team_id && sprint.id == t.sprint_id %>
-          <ol><%=t.requirement.description%></ol>
+          <ol class="text-center"><%=t.requirement.description%></ol>
           <% if @user == current_user %>
-            <ol>
+            <ol class="text-center">
               <%= link_to 'undelegate', [@user,@project, sprint,t], method: :delete, data: {:confirm => 'Are you sure?'} %>
             </ol>
           <% end %>

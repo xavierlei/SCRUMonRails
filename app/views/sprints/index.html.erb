@@ -1,16 +1,16 @@
 <h1>Scrum Board</h1>
-<table id="scrumboard">
+<table id="scrumboard" class="table">
   <tr id="team">
     <td>
       <% if @user == current_user %>
-        <ol>
+        <ol class="text-center">
           <%=link_to "add sprint", new_user_project_sprint_path(@project.user_id,@project.id)%>
         </ol>
       <% end %>
     </td>
     <%@project.teams.each do |t|%>
       <td>
-        <h4><%=t.name%></h1>
+        <h4 class="text-center"><%=t.name%></h1>
       </td>
     <% end %>
   </tr>

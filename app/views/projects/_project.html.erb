@@ -1,3 +1,4 @@
+<%=div_for project do%>
 <li id ="project-<%= project.id%>" >
 <%= link_to gravatar_for(project.user, size: 50), project.user %>
   <span class="name">Project name: <%=link_to project.name, user_project_path(project.user_id,project.id)%></span>
@@ -8,8 +9,10 @@
     <%if @user == current_user && project.user_id == @user.id%>
       <ol>
         <%= link_to "edit", edit_user_project_path(project.user_id,project.id) %>
-        <%= link_to 'delete', [project.user,project], method: :delete, data: {:confirm => 'Are you sure?'} %>
+        <%= link_to 'delete', [project.user,project], method: :delete, data: {:confirm => 'Are you sure?'},
+            :remote => true%>
       </ol>
     <%end%>
   </span>
 </li>
+<% end %>

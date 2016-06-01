@@ -32,15 +32,16 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
-#coloquei isto em comentário porque senão não
-#deixava fazer registo. só se acrescentou esse código por causa dos testes
-#no capitulo de login
-# Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  def self.search(term)
+    where('LOWER(name) LIKE :term OR LOWER(email) LIKE :term', term: "%#{term.downcase}%")
+  end
+
 
 
 end

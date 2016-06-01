@@ -1,9 +1,12 @@
-<li id ="team-<%= team.id%>" >
-  <span class="name"><h1><%=link_to team.name, user_project_team_path(@user.id,@project.id,team.id)%><h1></span>
+<%=div_for team do%>
+<dl id ="team-<%= team.id%>" >
+  <span class="name"><h1><%=link_to team.name, user_project_team_path(@user.id,@project.id,team.id)%></h1></span>
   <% if @user == current_user %>
     <span class="edit_link">
       <%= link_to "edit", edit_user_project_team_path(@user.id,@project.id,team.id) %>
-      <%= link_to 'delete', [@user,@project, team], method: :delete, data: {:confirm => 'Are you sure?'} %>
+      <%= link_to 'delete', [@user,@project, team], method: :delete, data: {:confirm => 'Are you sure?'},
+          :remote => true%>
     </span>
   <% end %>
-</li>
+</dl>
+<% end %>

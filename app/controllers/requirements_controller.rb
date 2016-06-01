@@ -6,26 +6,22 @@ class RequirementsController < ApplicationController
     @project = @user.projects.find(params[:project_id])
     @requirement = Requirement.new
   end
-
   def edit
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @requirement = @project.requirements.find(params[:id])
   end
-
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @requirement = @project.requirements.find(params[:id])
-    if @requirement.destroy
-      flash[:success] = "requirement successfuly destroyed"
-      redirect_to user_project_path(@user.id,@project.id)
-    else
-      flash[:danger] = "requirement delete failed"
+    @requirement.destroy
+    respond_to do |format|
+      format.html { redirect_to user_project_path(@user.id,@project.id) }
+      format.json { head :ok }
+      format.js
     end
-
   end
-
   def create
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -37,7 +33,6 @@ class RequirementsController < ApplicationController
     end
     redirect_to user_project_path(@user.id,@project.id)
   end
-
   def update
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
@@ -54,20 +49,16 @@ class RequirementsController < ApplicationController
     def requirement_params
       params.require(:requirement).permit(:description)
     end
-    #####This code is (almost) the same that in UsersController.
-    #####move this code to ApplicationController
-       def logged_in_user
-         unless logged_in?
-           store_location
-           flash[:danger] = "Please log in."
-           redirect_to login_url
-         end
-       end
-
-       # Confirms the correct user.
-       def correct_user
-         @user = User.find(params[:user_id])
-         redirect_to(root_url) unless current_user?(@user)
-       end
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+    def correct_user
+      @user = User.find(params[:user_id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
 
 end

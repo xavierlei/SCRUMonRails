@@ -2,33 +2,42 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="project_info">
+    <div class="container-fluid">
       <h1>
         <%=@project.name%>
       </h1>
       <h2><%= @project.description %></h2>
+      </div>
+      <div class="container-fluid">
       <ol>
         <%=link_to "SCRUM BOARD", user_project_sprints_path(@project.user_id,@project.id)%>
       </ol>
+      </div>
     </section>
     <section class="project_info">
-      <h3>TEAMS</h3>
-      <% if @user == current_user %>
-        <ol><%=link_to "add team", new_user_project_team_path(@project.user_id,@project.id) %></ol>
-      <% end %>
+    <div class="container-fluid text-center">
+       <% if @user == current_user %>
+          <%=link_to new_user_project_team_path(@project.user_id,@project.id) do %>
+              <img id="teamLogo" src="<%= image_url('teams.png')%>"/>
+            <% end %>
+          <% end %>
+    </div>
+    <div class="container-fluid">
+
       <% if @project.teams.any? %>
-        <ol>
           <%=render @teams%>
-        </ol>
         <% else %>
           <h1>there are currently no team added</h1>
       <% end %>
+    </div>
     </section>
   </aside>
-
-
   <div class="col-md-8">
     <% if @user == current_user %>
-      <h3><%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %></h3>
+      <h3>
+          <span class="glyphicon glyphicon-plus"></span>
+          <%= link_to "add requirement", new_user_project_requirement_path(@project.user_id,@project.id) %>
+      </h3>
       <%else%>
       <h3>requirements</h3>
     <% end %>
@@ -38,8 +47,4 @@
       </ol>
     <%end%>
   </div>
-
-
-
-
 </div>

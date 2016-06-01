@@ -37,12 +37,12 @@ class ProjectsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:id])
-    if @project.destroy
-      flash[:success] = "project successfuly deleted"
-    else
-      flash[:danger] = "error while deleting project"
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.json { head :ok }
+      format.js
     end
-    redirect_to @user
   end
 
   def create
@@ -73,8 +73,6 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description)
     end
- #####This code is (almost) the same that in UsersController.
- #####move this code to ApplicationController
     def logged_in_user
       unless logged_in?
         store_location
@@ -83,12 +81,10 @@ class ProjectsController < ApplicationController
       end
     end
 
-    # Confirms the correct user.
     def correct_user
       @user = User.find(params[:user_id])
       redirect_to(root_url) unless current_user?(@user)
     end
-
     def check_user_permission
       contribution_project_ids = current_user.teams.map(&:project_id)
       own_projects_ids = current_user.projects.map(&:id)

@@ -35,8 +35,6 @@ class TasksController < ApplicationController
     redirect_to user_project_sprints_path(@user.id,@project.id)
   end
   private
-  #####This code is (almost) the same that in UsersController.
-  #####move this code to ApplicationController
   def logged_in_user
     unless logged_in?
       store_location
@@ -44,8 +42,6 @@ class TasksController < ApplicationController
       redirect_to login_url
     end
   end
-
-  # Confirms the correct user.
   def correct_user
     @user = User.find(params[:user_id])
     redirect_to(root_url) unless current_user?(@user)

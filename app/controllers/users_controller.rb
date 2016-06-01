@@ -26,21 +26,19 @@ class UsersController < ApplicationController
     @user = User.new
   end
   def create
-      @user = User.new(user_params)
-      if @user.save
-        log_in @user
-        flash[:success] = "Welcome to SCRUM on Rails!"
-        redirect_to @user
-      else
-        flash.now[:danger] = 'Register failed'
-        render 'new'
-      end
+    @user = User.new(user_params)
+    if @user.save
+      log_in @user
+      flash[:success] = "Welcome to SCRUM on Rails!"
+      redirect_to @user
+    else
+      flash.now[:danger] = 'Register failed'
+      render 'new'
+    end
   end
-
   def edit
     @user = User.find(params[:id])
   end
-
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -51,16 +49,26 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   def index
     @users = User.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.json { @users_search = User.search(params[:term]) }
+    end
   end
+
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_url
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :ok }
+      format.js
+    end
   end
-
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
@@ -73,13 +81,10 @@ class UsersController < ApplicationController
         redirect_to login_url
       end
     end
-
-    # Confirms the correct user.
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
-
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
