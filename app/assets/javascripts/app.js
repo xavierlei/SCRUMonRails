@@ -1,7 +1,5 @@
 var app = window.app = {};
 
-
-
 app.Users = function() {
   this._input = $('#users-search-txt');
   this._initAutocomplete();
@@ -11,7 +9,7 @@ app.Users.prototype = {
   _initAutocomplete: function() {
     this._input
       .autocomplete({
-        source: '/users', 
+        source: '/users',
         appendTo: '#users-search-results',
         select: $.proxy(this._select, this)
       })

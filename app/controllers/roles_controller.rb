@@ -7,11 +7,6 @@ class RolesController < ApplicationController
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:team_id])
     @role = Role.new
-
-    respond_to do |format|
-      format.html
-      format.json { @users_search = User.search(params[:term]) }
-    end
   end
 
   def destroy
