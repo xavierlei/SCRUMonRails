@@ -45,5 +45,5 @@ projects2 = Project.all
 names = ["los bananas","los bandidos","los scrum maestros","los hombres barigudos ","los mariachis",
           "los nachos", "los mustachios", "los hombres sin bigotes","los de la Uminho"]
 5.times do
-  projects2.each{ |project| project.teams.create!(name: names.sample)}
+  projects2.each{ |project| project.teams.create!(name: Faker::Team.name)}
 end

@@ -305,6 +305,12 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+#teamLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 aside {
   textarea {
     height: 100px;
@@ -317,4 +323,18 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+
+/* welcome */
+#imgMain {
+  height: 75%;
+  width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding_user {
+    padding-bottom: 5px;
 }
