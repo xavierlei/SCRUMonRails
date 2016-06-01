@@ -1,5 +1,5 @@
 
-![Alt text](SCRUMonRails/Artifacts/sqlite3_bd.png)
+![Alt text](/Artifacts/sqlite3_bd.png)
 
 
 
