@@ -1,31 +1,40 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-      <%= @user.email %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <%if @user == current_user%>
-      <ol class ="projects"><h3><%= link_to "New Project", new_user_project_path(@user.id) %></h3></ol>
-      <% if @projects.any? %>
-        <h3>Projects (<%=@user.projects.count%>)</h3>
-        <ol class="projects">
-          <%=render @projects%>
-        </ol>
-      <% end %>
-      <%= will_paginate @projects%>
-      <% if @projects_contributed.any? %>
-        <h3>Contributing to Projects (<%=@projects_contributed.count%>)</h3>
-        <ol class="projects">
-          <%=render @projects_contributed%>
-        </ol>
-      <%end%>
-      <%= will_paginate @projects_contributed%>
-    <%end%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+          <%= gravatar_for @user %>
+        <h1>
+          <%= @user.name %>
+        </h1>
+          <p class="text-center"><%= @user.email %></p>
+    </div>
+      <div class="col-md-6"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+        <%if @user == current_user%>
+        <% if @projects.any? %>
+         <h3>Projects
+            (<%=@user.projects.count%>)
+            <%= link_to new_user_project_path(@user.id) do %>
+              <span class="glyphicon glyphicon-plus"></span>
+            <% end %>
+        </h3>
+          <ol class="projects">
+            <%=render @projects%>
+          </ol>
+        <% end %>
+        <%= will_paginate @projects%>
+        </div>
+        <div class="col-md-6">
+        <% if @projects_contributed.any? %>
+          <h3 class="text-center">Contributing to Projects (<%=@projects_contributed.count%>)</h3>
+            <ol class="projects">
+              <%=render @projects_contributed%>
+            </ol>
+          <%end%>
+            <%= will_paginate @projects_contributed%>
+          <%end%>
+        </div>
   </div>
 </div>
