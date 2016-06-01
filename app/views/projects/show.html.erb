@@ -2,24 +2,34 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="project_info">
+    <div class="container-fluid">
       <h1>
         <%=@project.name%>
       </h1>
       <h2><%= @project.description %></h2>
+      </div>
+      <div class="container-fluid">
       <ol>
         <%=link_to "SCRUM BOARD", user_project_sprints_path(@project.user_id,@project.id)%>
       </ol>
+      </div>
     </section>
     <section class="project_info">
-      <h3>TEAMS</h3>
+    <div class="container-fluid">
+      <img id="teamLogo" src="<%= image_url('teams.png')%>"/>
+    </div>
+    <div class="container-fluid">
       <% if @user == current_user %>
-        <%=link_to "add team", new_user_project_team_path(@project.user_id,@project.id) %>
+        <%=link_to new_user_project_team_path(@project.user_id,@project.id) do %>
+           <span class="glyphicon glyphicon-plus"></span>
+          <% end %>
       <% end %>
       <% if @project.teams.any? %>
           <%=render @teams%>
         <% else %>
           <h1>there are currently no team added</h1>
       <% end %>
+    </div>
     </section>
   </aside>
   <div class="col-md-8">
