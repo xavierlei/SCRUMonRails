@@ -1,12 +1,14 @@
 class RolesController < ApplicationController
   before_action :logged_in_user, only: [:create,:destroy]
   before_action :correct_user, only: [:create,:destroy]
+
   def new
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])
     @team = @project.teams.find(params[:team_id])
     @role = Role.new
   end
+
   def destroy
     @user = User.find(params[:user_id])
     @project = @user.projects.find(params[:project_id])

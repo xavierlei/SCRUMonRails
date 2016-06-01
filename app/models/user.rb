@@ -38,4 +38,10 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def self.search(term)
+    where('LOWER(name) LIKE :term OR LOWER(email) LIKE :term', term: "%#{term.downcase}%")
+  end
+
+
+
 end
