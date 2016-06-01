@@ -1,8 +1,22 @@
 
 <% provide(:title, 'All users') %>
+
+<div class="users-search">
+  <b>Search user:</b>
+  <input type="text" id="users-search-txt" autofocus>
+  <div class="search-results" id="users-search-results"></div>
+</div>
+
+
 <h1>All users</h1>
 <%= will_paginate %>
 <ul class="users">
   <%= render @users %>
 </ul>
 <%= will_paginate %>
+
+
+
+<script>
+  new app.Users;
+</script>

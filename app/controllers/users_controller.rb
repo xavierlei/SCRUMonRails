@@ -48,9 +48,18 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+
+
   def index
     @users = User.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.json { @users_search = User.search(params[:term]) }
+    end
   end
+
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy
