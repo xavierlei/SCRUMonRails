@@ -1,7 +1,0 @@
-
-![Alt text](SCRUMonRails/Artifacts/sqlite3_bd.png)
-
-thumbnail = image.make_thumbnail(100)
-thumbnail.save('SCRUMonRails/Artifacts/sqlite3_bd.png', :png)
-
-
