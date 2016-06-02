@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def self.search(term)
-    where('LOWER(name) LIKE :term OR LOWER(email) LIKE :term', term: "%#{term.downcase}%")
+    where('LOWER(name) LIKE :term OR LOWER(email) LIKE :term', term: "%#{term.downcase}%").limit(5)
   end
 
 
